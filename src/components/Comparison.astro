@@ -1,0 +1,35 @@
+---
+interface Props {
+  id: string;
+  type?: string;
+  photographic?: boolean;
+}
+const { id, type = 'whitening', photographic = false } = Astro.props;
+const teeth = Array.from({ length: 10 }, (_, i) => ({
+  x: 93 + i * 43,
+  y: 163 + Math.abs(i - 4.5) ** 1.6 * 3,
+}));
+---
+<div class:list={['comparison', { 'comparison-photo': photographic }]} data-comparison>
+  {photographic ? <img src="/images/whitening-after-v3.webp" width="1086" height="724" alt="AI-generated demonstration of a naturally brighter smile; not a real patient result" loading="lazy" decoding="async"/> : <svg viewBox="0 0 640 400" role="img" aria-label="Illustrated smile after treatment">
+    <rect width="640" height="400" fill="#d4e6dd"/>
+    <path d="M63 168Q320 86 577 168L560 253Q320 344 80 253Z" fill="#b78475"/>
+    <path d="M85 183Q320 123 555 183L539 245Q320 290 102 245Z" fill="#5b514b"/>{teeth.map(({x,y}) =>
+      <path d={`M${x} ${y}q20-8 39 0v53q-20 18-39 0Z`} fill="#faf9ed" stroke="#d1d5c6" stroke-width="1.4"/>)}<path d="M63 168Q320 241 577 168M80 253Q320 314 560 253" fill="none" stroke="#c79a87" stroke-width="14" stroke-linecap="round"/>
+  </svg>}
+  <div class="before-layer">
+    {photographic ? <img src="/images/whitening-before-v3.webp" width="1086" height="724" alt="" loading="lazy" decoding="async"/> : <svg viewBox="0 0 640 400" aria-hidden="true">
+      <rect width="640" height="400" fill="#e6ded0"/>
+      <path d="M63 168Q320 86 577 168L560 253Q320 344 80 253Z" fill="#b78475"/>
+      <path d="M85 183Q320 123 555 183L539 245Q320 290 102 245Z" fill="#5b514b"/>{teeth.map(({x,y}, i) =>
+        <path d={`M${x} ${y}q20-8 39 0v53q-20 18-39 0Z`} fill={type === 'whitening' ? '#d9d0ad' : '#eee9d7'} stroke="#bdbba5" stroke-width="1.4" transform={type === 'aligners' ? `rotate(${(i % 3 - 1) * 10} ${x+20} ${y+25}) translate(${i%2 ? 3 : -3} ${i%3*3})` : type === 'veneers' ? `translate(0 ${i%3*5}) scale(1 .98)` : undefined}/>)}<path d="M63 168Q320 241 577 168M80 253Q320 314 560 253" fill="none" stroke="#c79a87" stroke-width="14" stroke-linecap="round"/>
+    </svg>}
+  </div>
+  <span class="compare-label before">BEFORE</span>
+  <span class="compare-label after">AFTER</span>
+  <div class="comparison-line">
+  </div>
+  <div class="comparison-handle" aria-hidden="true">↔</div>
+<label for={`compare-${id}`} class="sr-only">Compare before and after {type} {photographic ? 'generated demonstration photographs' : 'illustration'}</label>
+<input id={`compare-${id}`} type="range" min="0" max="100" value="50" aria-label={`Before and after ${type} comparison`} />
+</div>

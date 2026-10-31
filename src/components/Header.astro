@@ -1,0 +1,21 @@
+---
+import { clinic, services } from '../clinic.config';
+import Icon from './Icon.astro';
+const path = Astro.url.pathname;
+const links = [['Our dentists','/team/'],['The studio','/about/'],['Insurance & pricing','/pricing/']];
+---
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="announcement"><span>{clinic.address.area}</span><span><span class="utility-dot"></span> Accepting new patients <a href="/book/">Find your first appointment ↗</a></span><a href="/emergency/">Dental emergency? Let’s help.</a></div>
+<header class="site-header" data-header>
+  <div class="container nav-wrap">
+    <a href="/" class="brand" aria-label={`${clinic.name} home`}><img src={clinic.logo} width="38" height="42" alt=""/><span>{clinic.shortName}<small>DENTAL STUDIO · {clinic.address.city.toUpperCase()}</small></span></a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <details class="nav-disclosure"><summary>Treatments <span aria-hidden="true">⌄</span></summary><div class="nav-treatment-menu"><a href="/services/" class="nav-menu-intro">A little more about our care <Icon name="diagonal" size={18}/></a>{services.map(service=><a href={`/services/${service.slug}/`}><span>{service.name}</span><Icon name="arrow" size={15}/></a>)}</div></details>
+      {links.map(([label,href])=><a href={href} aria-current={path.startsWith(href)?'page':undefined}>{label}</a>)}
+    </nav>
+    <a class="nav-phone" href={`tel:${clinic.phoneHref}`} aria-label={`Call ${clinic.name}`}><Icon name="phone" size={17}/></a>
+    <a class="header-book" href="/book/">Book a visit <Icon name="diagonal" size={17}/></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation"><Icon name="menu"/></button>
+  </div>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden>{[['Treatments','/services/'],...links,['Smile gallery','/gallery/'],['Patient stories','/reviews/'],['Contact & location','/contact/'],['Book a visit','/book/']].map(([label,href])=><a href={href}>{label}<Icon name="diagonal" size={20}/></a>)}</nav>
+</header>

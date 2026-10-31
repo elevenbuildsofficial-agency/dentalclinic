@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Scene from '../components/Scene.astro';
+import Cta from '../components/Cta.astro';
+import { clinic } from '../clinic.config';
+---
+<Layout title="A studio with a different feeling" description={`The story, values and considered technology behind ${clinic.name}, a fictional neighborhood dental studio.`}>
+  <PageHero eyebrow="THE STUDIO" title="A different kind" accent="of dental feeling." description={`A quiet room. Someone who listens. The feeling that you have a say. That is where ${clinic.shortName} began.`}/>
+  <section class="container section-pad about-intro">
+    <div>
+      <p class="eyebrow">AN INDEPENDENT SPIRIT, SINCE {clinic.foundingYear}</p>
+      <h2 data-reveal>Better care starts<br/>
+        <em>with a better conversation.</em>
+      </h2>
+      <p>{clinic.doctors[0].name}’s idea was simple: make a dental practice that she would want her own family to visit. A place where the appointment has enough room for a real conversation.</p>
+    <p>That idea became {clinic.name}. Today, our imagined neighborhood studio brings general, restorative and cosmetic dentistry together under one roof, with the same care running through it all.</p>
+    <p>We explain the findings. We discuss the choices. You decide when you are ready. It is a small shift in approach that changes how the whole visit feels.</p>
+    </div>
+  <div class="image-wide" data-image-reveal>
+    <img src="/images/studio-v2.webp" width="1000" height="900" alt="Original photographic demo visualization of a warm dental studio with a sage chair and oak cabinetry"/>
+    <span class="image-caption">A SPACE TO EXHALE / ORIGINAL STUDIO VISUALIZATION</span>
+    </div>
+  </section>
+<section class="bg-sand section-pad">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">WHAT STAYS THE SAME</p>
+        <h2 data-reveal>Our way of <em>caring.</em>
+          </h2>
+        </div>
+      </div>
+    <div class="values-list">{[['01','Time, well spent.','We leave room to listen, answer the second question, and explain things again. A visit should feel considered from beginning to end.'],['02','Clarity before commitment.','A sensible plan, the alternatives and a written estimate. You should understand what is being recommended and why.'],['03','Less, when less is right.','We consider prevention and conservative options first, with long-term tooth health guiding the conversation.']].map(([n,title,copy])=>
+      <article class="value-row" data-reveal>
+          <span>{n}</span>
+          <h3>{title}</h3>
+          <p>{copy}</p>
+          </article>)}</div>
+    </div>
+  </section>
+<section class="container section-pad">
+  <p class="eyebrow">A FEW CHAPTERS IN OUR DEMO STORY</p>
+  <h2 class="spaced-top" data-reveal>Small beginnings.<br/>
+    <em>Thoughtful growth.</em>
+    </h2>
+  <div class="timeline">{[['2014','One dentist. Two rooms. A new idea of what a dental visit could feel like.'],['2018','Our family grows, with more room for children and first-time visitors.'],['2022','Digital scanning joins the studio, helping make complex plans easier to see.'],['2026','The same neighborhood spirit, with more ways to care for the whole smile.']].map(([year,copy])=>
+    <div data-reveal>
+        <h3>{year}</h3>
+        <p>{copy}</p>
+        </div>)}</div>
+  </section>
+<section class="aligner-section section-pad" data-aligner-section>
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A LITTLE MOVEMENT. A CONSIDERED PLAN.</p>
+        <h2 data-reveal>Good things<br/>
+          <em>come into alignment.</em>
+          </h2>
+        </div>
+      <p>Digital planning helps us explain the journey. Scroll to lift the clear tray and explore the arch underneath.</p>
+      </div>
+    <div class="aligner-visual-track"><Scene variant="aligner"/></div>
+    <div class="aligner-captions">
+      <span>A SEATED CLEAR TRAY</span>
+      <span>A CLOSER LOOK UNDERNEATH</span>
+      <span>A NEW PERSPECTIVE</span>
+      </div>
+    <p class="illustrative-note">Schematic animation only. Individual suitability, tooth movements and treatment times vary.</p>
+    </div>
+  </section>
+<section class="container section-pad technology-grid">
+  <div class="image-wide" data-image-reveal>
+    <img src="/images/studio-v2.webp" width="900" height="720" alt="Photographic demo of a calm dental studio with daylight, oak and sage green details" loading="lazy"/>
+    </div>
+  <div>
+    <p class="eyebrow">MODERN TOOLS. THOUGHTFUL HANDS.</p>
+    <h2 class="spaced-top" data-reveal>Technology with<br/>
+      <em>a human purpose.</em>
+      </h2>
+    <div class="technology-list">{[['01','Digital scans','A detailed model of your teeth to help discuss restorations and aligner planning.'],['02','Considered imaging','Images chosen according to clinical need, with findings explained in plain language.'],['03','A calmer environment','Soft light, space to pause, and a team that checks in rather than hurries on.']].map(([n,title,copy])=>
+      <div>
+          <span>{n}</span>
+          <article>
+            <h4>{title}</h4>
+            <p>{copy}</p>
+            </article>
+          </div>)}</div>
+    </div>
+  </section>
+<Cta/>
+</Layout>

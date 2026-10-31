@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import Cta from '../../components/Cta.astro';
+import { clinic } from '../../clinic.config';
+---
+<Layout title="Meet your people" description={`Meet the fictional dentists behind ${clinic.name} and its human approach to general, cosmetic and family care.`}>
+  <PageHero eyebrow="YOUR PEOPLE" title="A familiar face." accent="A thoughtful pair of hands." description="Different interests. A shared approach. Our team makes space for the person behind every appointment."/>
+  <section class="container section-pad">
+    <div class="team-grid">{clinic.doctors.map(doctor=>
+        <a class="team-card" href={`/team/${doctor.slug}/`}>
+          <div class:list={["team-card-image", {"portrait-triptych": doctor.imageLayout === "triptych"}]} style={`--portrait-left:${doctor.imageOffset}`} data-image-reveal>
+            <img src={doctor.image} width="700" height="850" alt={`Photographic demo portrait of fictional clinician ${doctor.name}`}/>
+          </div>
+          <h3>{doctor.name}</h3>
+          <p>{doctor.role}</p>
+          <p>{doctor.credentials}</p>
+          <span class="text-link">A little more about {doctor.name.split(' ')[1]}<Icon name="diagonal" size={16}/>
+          </span>
+        </a>)}</div>
+    <p class="illustrative-note spaced-top">Fictional clinicians, credentials and original photographic demo portraits, created for this showcase.</p>
+  </section>
+  <section class="bg-mist section-pad">
+    <div class="container intro-grid">
+      <p class="eyebrow">ONE TEAM. A SHARED WAY OF THINKING.</p>
+      <div>
+        <h2 data-reveal>The best thing<br/>we bring? <em>Our attention.</em>
+        </h2>
+        <p class="lede">We talk through cases, ask each other questions and take the time to get the details right. The result is a plan that makes sense for you, with people you get to know.</p>
+      </div>
+    </div>
+  </section>
+  <Cta/>
+</Layout>

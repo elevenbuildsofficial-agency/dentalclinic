@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Comparison from '../components/Comparison.astro';
+import Cta from '../components/Cta.astro';
+const cases = [
+  {
+    id: 'one',
+    type: 'whitening',
+    title: 'A softer, brighter shade.',
+    label: 'Professional whitening',
+    time: 'Illustrative shade change',
+  },
+  {
+    id: 'two',
+    type: 'aligners',
+    title: 'A little room for alignment.',
+    label: 'Clear aligners',
+    time: 'Illustrative alignment',
+  },
+  {
+    id: 'three',
+    type: 'veneers',
+    title: 'Small details. A natural feeling.',
+    label: 'Veneers & cosmetic care',
+    time: 'Illustrative proportion change',
+  },
+  {
+    id: 'four',
+    type: 'whitening',
+    title: 'The familiar smile, refreshed.',
+    label: 'Professional whitening',
+    time: 'Illustrative shade change',
+  },
+];
+---
+<Layout title="Smile gallery" description="Explore interactive before-and-after illustrations of whitening, aligners and cosmetic dental care.">
+  <PageHero eyebrow="THE SMILE GALLERY" title="A change you feel." accent="A smile that’s still you." description="Drag the handle to explore our original before-and-after illustrations. Every real treatment begins with individual planning."/>
+<section class="container section-pad" data-gallery>
+  <p class="eyebrow">LOOK A LITTLE CLOSER</p>
+  <div class="filter-chips" role="group" aria-label="Filter smile gallery">{[['all','All smiles'],['whitening','Whitening'],['aligners','Clear aligners'],['veneers','Cosmetic']].map(([value,label])=>
+    <button class="filter-chip" data-filter={value} aria-pressed={value==='all'?'true':'false'}>{label}</button>)}</div>
+  <p class="sr-only" data-filter-status role="status">Showing all 4 illustrated smiles.</p>
+  <div class="gallery-grid">{cases.map(item=>
+    <article class="gallery-card" data-category={item.type}>
+        <Comparison id={item.id} type={item.type}/>
+        <h3>{item.title}</h3>
+        <div class="gallery-meta">
+          <span>{item.label}</span>
+          <span>{item.time}</span>
+          </div>
+        </article>)}</div>
+  <p class="illustrative-note spaced-top">All comparisons are schematic illustrations, not real patient photos or promised results. Real outcomes and treatment times vary.</p>
+  </section>
+<section class="bg-sand section-pad">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A DIFFERENT PERSPECTIVE</p>
+        <h2>Good care looks<br/>
+          <em>different on everyone.</em>
+          </h2>
+        </div>
+      <p>Explore horizontally. Then explore what might be right for you.</p>
+      </div>
+    <div class="horizontal-gallery">{cases.slice(0,3).map((item,i)=>
+      <article>
+          <Comparison id={`horizontal-${i}`} type={item.type}/>
+          <p class="illustrative-note">{item.label} / A demonstration of possibility, not a guarantee.</p>
+          </article>)}</div>
+    </div>
+  </section>
+<Cta/>
+</Layout>

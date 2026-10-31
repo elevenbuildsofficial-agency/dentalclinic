@@ -1,0 +1,129 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { clinic, services } from '../clinic.config';
+---
+<Layout title="A little time for you" description={`Try the ${clinic.shortName} demo appointment experience: choose a service, date and time, then review your appointment preview.`}>
+  <section class="container section-pad booking-layout">
+    <div class="booking-intro">
+      <div class="breadcrumbs">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>Book a visit</span>
+      </div>
+      <p class="eyebrow">LET’S FIND YOUR STARTING POINT</p>
+    <h1 data-headline>A little time.<br/>
+      <em>Just for you.</em>
+      </h1>
+    <p class="lede">A first visit, a familiar check-in, or a question you would like to talk through. Let’s find a time that works.</p>
+    <div class="booking-note">
+      <Icon name="heart" size={28}/>
+      <p>This is a front-end demonstration. No real appointment is reserved and no personal information is sent or saved. Please use sample details.</p>
+      </div>
+    <p class="illustrative-note spaced-top">Times shown in {clinic.timezone}. Sample availability follows our opening hours.</p>
+    <a href="/emergency/" class="text-link spaced-top">Need urgent care?<Icon name="diagonal" size={16}/>
+      </a>
+    </div>
+  <form class="booking-form" data-booking novalidate>
+    <ol class="step-progress" aria-label="Appointment steps">
+      <li aria-current="step">
+        <span>1</span> Your care</li>
+      <li>
+        <span>2</span> A time</li>
+      <li>
+        <span>3</span> About you</li>
+      <li>
+        <span>4</span> Review</li>
+      </ol>
+    <fieldset data-step="0">
+      <legend>What brings you in?</legend>
+      <p class="form-help">Choose what feels closest. We can work out the details together.</p>
+      <div class="service-choices">{[{slug:'first-visit',name:'A first visit / check-up'},...services].map(service=>
+        <label class="choice">
+            <input type="radio" name="service" value={service.slug} required/>
+            <span>{service.name}</span>
+            </label>)}</div>
+      </fieldset>
+    <fieldset data-step="1" hidden>
+      <legend>A moment that suits you.</legend>
+      <p class="form-help">Pick a date to see illustrative time slots. Sundays are our day to rest.</p>
+      <div class="form-field">
+        <label for="visit-date">Preferred date</label>
+        <input type="date" name="date" id="visit-date" required aria-describedby="date-help"/>
+        <small id="date-help" class="form-help">Up to 90 days ahead. Clinic local time: {clinic.timezone}.</small>
+        </div>
+      <p class="field-label">Available demo times</p>
+      <div class="slots spaced-top" data-slots>
+        <p class="form-help">Choose a date first.</p>
+        </div>
+      </fieldset>
+    <fieldset data-step="2" hidden>
+      <legend>A little about you.</legend>
+      <p class="form-help">Sample details only. Your entries stay in this page and disappear when you leave.</p>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="first-name">First name</label>
+          <input id="first-name" name="firstName" autocomplete="given-name" required maxlength="60"/>
+          </div>
+        <div class="form-field">
+          <label for="last-name">Last name</label>
+          <input id="last-name" name="lastName" autocomplete="family-name" required maxlength="60"/>
+          </div>
+        </div>
+      <div class="form-field">
+        <label for="booking-email">Email address</label>
+        <input id="booking-email" name="email" type="email" autocomplete="email" required maxlength="120"/>
+        </div>
+      <div class="form-field">
+        <label for="booking-phone">Phone number</label>
+        <input id="booking-phone" name="phone" type="tel" autocomplete="tel" required maxlength="30"/>
+        </div>
+      <div class="form-field">
+        <label for="booking-note">Anything that would help you feel comfortable? (optional)</label>
+        <textarea id="booking-note" name="note" rows="3" maxlength="500" placeholder="For the demo, try ‘I would like a little extra time.’">
+          </textarea>
+        </div>
+      <label class="form-consent">
+        <input type="checkbox" name="consent" required/>
+        <span>I understand this is a demo and that no real appointment will be made. <a href="/privacy/">How this demo handles information.</a>
+          </span>
+        </label>
+      </fieldset>
+      <fieldset data-step="3" hidden>
+      <legend>One last look.</legend>
+      <p class="form-help">Check your choices before creating your appointment preview.</p>
+      <div class="booking-summary" data-review>
+        </div>
+      <p class="form-help">This is an illustration of the booking experience. The time is not held or confirmed with a clinic.</p>
+      </fieldset>
+      <p class="form-error" data-error role="alert" aria-live="polite">
+      </p>
+      <div class="form-actions">
+      <button type="button" class="back-button" data-back hidden>Back</button>
+      <button type="button" class="button" data-next disabled data-form-enable>
+        <span>Find a time</span>
+        <Icon name="diagonal" size={18}/>
+        </button>
+      <button type="submit" class="button" data-confirm hidden disabled data-form-enable>
+        <span>Create demo preview</span>
+        <Icon name="check" size={18}/>
+        </button>
+      </div>
+    <div class="confirmation" data-confirmation hidden tabindex="-1">
+      <Icon name="check" size={40}/>
+      <p class="eyebrow">YOUR DEMO APPOINTMENT PREVIEW</p>
+      <h2>A good place<br/>
+        <em>to begin.</em>
+        </h2>
+      <p>Here is how an appointment confirmation could look. No booking was made, no email was sent, and your details have not been stored.</p>
+      <div class="booking-summary" data-final-summary>
+        </div>
+      <button class="button" type="button" data-restart>Try another appointment<Icon name="arrow" size={18}/>
+        </button>
+      </div>
+    <noscript>
+      <p class="no-script-note">The interactive booking demo needs JavaScript. You can still explore all treatment information and <a href="/contact/">contact details</a>.</p>
+      </noscript>
+      </form>
+    </section>
+  </Layout>

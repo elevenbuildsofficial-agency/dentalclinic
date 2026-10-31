@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import Cta from '../../components/Cta.astro';
+import { articles } from '../../clinic.config';
+const article = articles[0];
+---
+<Layout title="The dental journal" description="Thoughtful notes on dental visits, everyday habits and a little less uncertainty around caring for your teeth.">
+  <PageHero eyebrow="THE DENTAL JOURNAL" title="A little knowledge." accent="A better everyday." description="Thoughtful notes from the studio. Useful things, explained simply, with room for your next question."/>
+  <section class="container section-pad blog-feature">
+    <a class="image-wide" href={`/blog/${article.slug}/`}>
+      <img src={article.image} width="900" height="720" alt="Illustration of a quiet, sunlit studio corner with a plant and a stack of books"/>
+    </a>
+    <div>
+      <p class="eyebrow">{article.category} / {article.time}</p>
+      <h2 data-reveal>{article.title}</h2>
+      <p>{article.excerpt}</p>
+      <a class="text-link" href={`/blog/${article.slug}/`}>Read the story<Icon name="diagonal" size={18}/>
+      </a>
+    </div>
+  </section>
+  <section class="container section-pad border-top">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">SMALL NOTES, USEFUL HABITS</p>
+        <h2>A little help<br/>
+          <em>between visits.</em>
+        </h2>
+      </div>
+      <p>Three short notes from our demo editorial desk.</p>
+    </div>
+    <div class="tips-list">{[['01','Make room for the basics.','Brush twice a day with fluoride toothpaste and clean between your teeth daily. Ask your dentist which tools suit your teeth and gums.','EVERYDAY CARE'],['02','Bring your questions.','Write down what has been bothering you before an appointment. Questions about comfort, costs and alternatives are all part of a useful visit.','A BETTER VISIT'],['03','A plan made around you.','How often you need a check-up depends on your own oral health and risk. Discuss a sensible recall interval with your dentist.','PREVENTION']].map(([n,title,copy,category])=>
+        <article>
+          <span class="eyebrow">{n}</span>
+          <div>
+            <h3>{title}</h3>
+            <p>{copy}</p>
+          </div>
+          <p class="eyebrow">{category}</p>
+        </article>)}</div>
+    <p class="illustrative-note spaced-top">General educational copy. See the <a href="https://www.nhs.uk/symptoms/toothache/">NHS oral care guidance</a> and ask your own dental professional for personalized advice.</p>
+  </section>
+  <Cta/>
+</Layout>

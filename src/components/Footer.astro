@@ -1,0 +1,51 @@
+---
+import { clinic } from '../clinic.config';
+import Icon from './Icon.astro';
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-intro">
+        <a class="brand" href="/">
+          <img src={clinic.logo} width="36" height="40" alt=""/>
+          <span>{clinic.shortName}<small>DENTAL STUDIO</small>
+          </span>
+        </a>
+        <p>{clinic.tagline}</p>
+        <a class="text-link" href={`tel:${clinic.phoneHref}`}>{clinic.phone}<Icon name="diagonal" size={16}/>
+        </a>
+        <p>{clinic.address.street}<br/>{clinic.address.city}, {clinic.address.region} {clinic.address.postcode}</p>
+      </div>
+      <div>
+        <p class="eyebrow">EXPLORE</p>
+        <a href="/about/">The studio</a>
+        <a href="/services/">Our care</a>
+        <a href="/team/">The team</a>
+        <a href="/gallery/">Smile gallery</a>
+        <a href="/reviews/">Patient stories</a>
+      </div>
+      <div>
+        <p class="eyebrow">GOOD TO KNOW</p>
+        <a href="/pricing/">Pricing & insurance</a>
+        <a href="/faq/">Common questions</a>
+        <a href="/blog/">The dental journal</a>
+        <a href="/emergency/">Emergency care</a>
+        <a href="/contact/">Find us</a>
+      </div>
+      <div>
+        <p class="eyebrow">LET’S CONNECT</p>
+      <a href={`mailto:${clinic.email}`}>{clinic.email}</a>{clinic.social.map(link =>
+      <a href={link.url} target="_blank" rel="noreferrer">{link.label} ↗</a>)}<a href="/book/">Make yourself at home ↗</a>
+      </div>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">{clinic.shortName}<span>®</span>
+    </div>
+    <div class="footer-bottom">
+    <span>© {new Date().getFullYear()} {clinic.name}</span>
+    <span>Independent spirit. Considered dentistry.</span>
+      <a href="/privacy/">Privacy</a>
+      </div>{clinic.demo && <p class="demo-disclosure">A fictional clinic, thoughtfully made for demonstration. Clinicians, reviews, ratings, results, prices, insurance and contact details are illustrative. Forms do not send information or book real appointments.</p>}</div>
+  </footer>
+<a class="mobile-book" href="/book/">A little time for you.<span>Book a visit <Icon name="diagonal" size={17}/>
+  </span>
+  </a>

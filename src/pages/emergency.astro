@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import { clinic } from '../clinic.config';
+---
+<Layout title="When it cannot wait" description="Emergency dental care information with a prominent demo call action and clear guidance on when to seek urgent medical help.">
+  <PageHero eyebrow="EMERGENCY DENTAL CARE" title="When it can’t wait," accent="a clear next step helps." description="Tooth pain, a broken tooth or swelling deserves prompt attention. Contact a real local dental provider to explain what is happening."/>
+<section class="container section-pad service-detail-layout">
+  <div class="prose">
+    <h2>Let’s start <em>with a call.</em>
+      </h2>
+    <p>Tell the dental team when the problem started, whether there is swelling or bleeding, and whether you have had an injury. They can help determine how urgently you need to be seen.</p>
+    <p>This is a fictional clinic demo. The number below is a reserved sample number and cannot provide care. If you need help now, call an actual local dental practice or emergency service.</p>
+    <div class="spaced-top">
+      <Button href={`tel:${clinic.phoneHref}`}>Call the studio · demo number</Button>
+      </div>
+    <div class="emergency-banner">
+      <h3>When to seek emergency medical care.</h3>
+      <p>Difficulty breathing or swallowing, severe swelling around the eye or neck, uncontrolled bleeding or a serious facial injury needs immediate medical attention. Use your local emergency service.</p>
+      </div>
+    <h2>While you arrange <em>care.</em>
+      </h2>
+    <p>Avoid chewing on the affected area and ask a dentist or pharmacist for advice that is appropriate for you. Do not place aspirin directly on a tooth or gum. A lost or knocked-out tooth needs prompt professional advice.</p>
+    <p>These general signs do not replace assessment. Read the <a class="text-link" href="https://www.nhs.uk/symptoms/toothache/" target="_blank" rel="noreferrer">NHS toothache guidance ↗</a> for additional background.</p>
+    </div>
+    <aside class="info-panel">
+    <p class="eyebrow">A PLAN FOR THE UNEXPECTED</p>
+    <dl>
+      <dt>Demo studio number</dt>
+      <dd>
+        <a href={`tel:${clinic.phoneHref}`}>{clinic.phone}</a>
+        </dd>
+      <dt>Illustrative assessment fee</dt>
+      <dd>{clinic.prices.emergency}</dd>
+      <dt>What to bring</dt>
+      <dd>A medication list, relevant medical information and any dental records you have.</dd>
+      </dl>
+    <p>Assessment and treatment charges are separate. This page does not offer a real urgent-care service.</p>
+    </aside>
+    </section>
+  </Layout>

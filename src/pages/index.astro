@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Scene from '../components/Scene.astro';
+import Icon from '../components/Icon.astro';
+import Button from '../components/Button.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import Comparison from '../components/Comparison.astro';
+import { clinic, services, faqs, stories } from '../clinic.config';
+const founder = clinic.doctors[0];
+const visits = [
+  ['01','A conversation first.','Your goals, your questions, your comfort. We make room for all three before we pick up a mirror.'],
+  ['02','Clarity at every step.','An examination, a clear explanation of what we see, and treatment choices that make sense.'],
+  ['03','A plan. At your pace.','A written estimate and time to think. You leave knowing what comes next, without feeling rushed.'],
+];
+---
+<Layout title="Modern dentistry. More personal care." description={`General, cosmetic and restorative dentistry at ${clinic.name}. Explore our fictional Brooklyn studio, clear treatment options and a calmer first visit.`}>
+  <div class="home-v2">
+    <section class="hero-v2 container">
+      <div class="hero-v2-copy">
+        <p class="eyebrow hero-location"><span class="status-dot"></span> YOUR NEIGHBORHOOD. A NEW KIND OF CARE.</p>
+        <h1 data-headline><span>Expert care.</span><span>A little more</span><em>human.</em></h1>
+        <p class="lede">Modern dentistry, familiar faces, and time for the things that matter to you. A healthier smile starts with feeling understood.</p>
+        <div class="hero-v2-actions"><Button href="/book/">Book your first visit</Button><a href="/services/" class="hero-care-link">Explore our care <Icon name="arrow" size={18}/></a></div>
+        <div class="hero-v2-proof"><span class="proof-stars" aria-label="Illustrative 4.9 out of 5 rating">{Array.from({length:5},()=> <Icon name="star" size={13}/>)}</span><p><b>{clinic.stats[0].value}/5</b> <span>Considered care. Happy people.</span><small>Illustrative studio rating</small></p></div>
+      </div>
+      <div class="hero-model-track"><div class="hero-v2-art"><div class="model-orbit" aria-hidden="true"></div><div class="model-orbit second" aria-hidden="true"></div><Scene/><span class="hero-art-side">A STRONG FOUNDATION FOR EVERY SMILE.</span></div></div>
+      <div class="hero-v2-bottom"><a href="#care">SCROLL TO GET TO KNOW US <Icon name="arrow" size={15}/></a><span>GENERAL · COSMETIC · RESTORATIVE</span><span>{clinic.address.area}</span></div>
+    </section>
+
+    <section class="patient-perks"><div class="container perks-inner"><p><Icon name="check" size={18}/><span>New patients, always welcome.</span></p><a href="/pricing/"><Icon name="check" size={18}/><span>Clear costs. Insurance guidance.</span><Icon name="diagonal" size={14}/></a><p><Icon name="check" size={18}/><span>Early starts. Saturday visits.</span></p></div></section>
+
+    <section id="care" class="container section-pad v2-intro">
+      <div class="section-heading"><div><p class="eyebrow">DENTISTRY THAT FITS YOUR LIFE</p><h2 data-reveal>We care for teeth.<br/><em>We make time for people.</em></h2></div><p>Everyday checkups, thoughtful restorations, and the confidence to ask every question. All in one calm, comfortable studio.</p></div>
+      <div class="studio-story-grid"><div class="studio-photograph" data-image-reveal><img src="/images/studio-v2.webp" width="1536" height="1024" alt="Original photographic visualization of the fictional Marlowe studio with a sage dental chair, oak cabinetry and soft daylight" loading="lazy"/><div class="photo-caption"><span>A SPACE TO EXHALE.</span><a href="/about/">Take a look inside <Icon name="diagonal" size={17}/></a></div></div><div class="studio-story-note"><span class="large-quote" aria-hidden="true">“</span><blockquote>A good dental visit should leave you feeling better about the next one.</blockquote><div class="note-signature"><span>{founder.name}</span><small>FOUNDER, {clinic.shortName.toUpperCase()}</small></div><a class="text-link" href="/team/">Meet your people<Icon name="diagonal" size={17}/></a><span class="studio-note-mark" aria-hidden="true"><Icon name="tooth" size={58}/></span></div></div>
+      <p class="media-disclosure">Original photographic demo imagery. A fictional studio, ready for your clinic’s story.</p>
+    </section>
+
+    <section class="v2-treatments section-pad"><div class="container"><div class="section-heading"><div><p class="eyebrow">CARE FOR EVERY CHAPTER</p><h2 data-reveal>The everyday.<br/><em>The possibilities.</em></h2></div><a href="/services/" class="text-link">Explore all treatments<Icon name="diagonal" size={18}/></a></div><div class="treatment-feature-grid"><a href="/services/dental-implants/" class="treatment-feature treatment-implant"><div class="treatment-feature-heading"><p class="eyebrow">RESTORE / 01</p><Icon name="diagonal" size={22}/></div><div class="treatment-scene"><Scene variant="implant"/></div><div class="treatment-feature-copy"><h3>A little more<br/>like your own.</h3><p>Dental implants, planned around your everyday.</p><span class="treatment-text-link">Explore dental implants</span></div></a><a href="/services/clear-aligners/" class="treatment-feature treatment-aligners"><div class="treatment-feature-heading"><p class="eyebrow">ALIGN / 02</p><Icon name="diagonal" size={22}/></div><div class="treatment-scene"><Scene variant="aligner"/></div><div class="treatment-feature-copy"><h3>Small shifts.<br/>A fresh perspective.</h3><p>Clear aligners, with a dentist along for the journey.</p><span class="treatment-text-link">Explore clear aligners</span></div></a></div><div class="v2-service-list">{services.slice(2).map(service=><a href={`/services/${service.slug}/`}><span class="service-ordinal">{service.number}</span><h3>{service.name}</h3><span>{service.short}</span><Icon name="diagonal" size={20}/></a>)}</div></div></section>
+
+    <section class="insurance-feature section-pad"><div class="container insurance-feature-grid"><div><p class="eyebrow">LET’S TALK ABOUT THE PRACTICAL THINGS</p><h2 data-reveal>Good care.<br/><em>Clear numbers.</em></h2><p class="lede">Know the options before you choose. We make room for insurance questions, a written estimate, and a plan that works for your life.</p><a class="text-link" href="/pricing/">Insurance, pricing & payment options<Icon name="diagonal" size={18}/></a></div><div class="insurance-paper"><p class="eyebrow">A THOUGHTFUL START</p><div class="first-visit-price"><span>New patient<br/>assessment</span><strong>{clinic.prices.newPatient}</strong></div><p>A conversation, a dental health assessment, and a clear next step. Individual imaging or treatment may affect your estimate.</p><div class="insurance-names">{clinic.insurance.slice(0,4).map(name=><span>{name}</span>)}</div><small>Illustrative USD prices and sample providers. This demo has no insurance contracts.</small><a href="/book/">Find your first appointment <Icon name="arrow" size={18}/></a></div></div></section>
+
+    <section class="container section-pad v2-visit"><div class="section-heading"><div><p class="eyebrow">YOUR FIRST VISIT, A LITTLE EASIER</p><h2 data-reveal>Come as you are.<br/><em>We’ll start there.</em></h2></div><p>Been a while? Unsure what you need? You don’t need to have it figured out before you walk in.</p></div><div class="visit-editorial-list">{visits.map(([number,title,copy])=><article data-reveal><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
+
+    <section class="v2-anatomy section-pad" data-anatomy-section>
+      <div class="container anatomy-layout">
+        <div class="anatomy-copy">
+          <p class="eyebrow">MODERN TOOLS. A DEEPER UNDERSTANDING.</p>
+          <h2 data-reveal>Behind every smile,<br/><em>there’s a little science.</em></h2>
+          <p class="lede">A better look helps us have a better conversation. We explain the details, so you can understand what’s happening and feel part of the plan.</p>
+          <div class="anatomy-facts"><div><span>01</span><p>Enamel — the natural protective surface.</p></div><div><span>02</span><p>Dentin — the support underneath.</p></div><div><span>03</span><p>Pulp — the living center.</p></div><div><span>04</span><p>Roots — a foundation below the gum.</p></div></div>
+          <p class="illustrative-note">An original, simplified model. Scroll to explore its layers.</p>
+        </div>
+        <div class="anatomy-visual-track"><div class="anatomy-art"><Scene variant="anatomy"/></div></div>
+      </div>
+    </section>
+
+    <section class="container section-pad v2-smiles"><div class="smile-photo" data-image-reveal><img src="/images/smile-v2.webp" width="1024" height="1280" alt="Original editorial demo portrait of a woman smiling naturally" loading="lazy"/><span>THE BEST SMILE STILL FEELS LIKE YOU.</span></div><div class="v2-smiles-copy"><p class="eyebrow">SMALL DETAILS. SOMETHING PERSONAL.</p><h2 data-reveal>Your smile.<br/><em>On your terms.</em></h2><p class="lede">A subtle change or a fresh start. We begin with what matters to you and talk honestly about the possibilities.</p><div class="v2-comparison"><Comparison id="home-v2" photographic/><p class="illustrative-note">AI-generated whitening comparison · Drag to compare · Not a real patient result.</p></div><a class="text-link" href="/gallery/">A look at the possibilities<Icon name="diagonal" size={17}/></a></div></section>
+
+    <section class="v2-founder section-pad"><div class="container v2-founder-grid"><div class:list={["founder-portrait", {"portrait-triptych": founder.imageLayout === "triptych"}]} style={`--portrait-left:${founder.imageOffset}`} data-image-reveal><img src={founder.image} width="700" height="850" alt={`Original photographic demo portrait of fictional clinician ${founder.name}`} loading="lazy"/><span>THE PEOPLE BEHIND YOUR CARE.</span></div><div class="founder-copy"><p class="eyebrow">EXPERT HANDS. FAMILIAR FACES.</p><h2 data-reveal>Really good at<br/><em>what we do.</em><br/>Even better together.</h2><blockquote>“{founder.quote}”</blockquote><p>{founder.name}<span>{founder.role}</span></p><a class="text-link" href="/team/">Meet your dental team<Icon name="diagonal" size={18}/></a></div></div></section>
+
+    <section class="container section-pad v2-reviews"><div class="section-heading"><div><p class="eyebrow">THE FEELING PEOPLE REMEMBER</p><h2 data-reveal>A few good words.<br/><em>From the other side.</em></h2></div><a class="text-link" href="/reviews/">More patient stories<Icon name="diagonal" size={17}/></a></div><div class="testimonials">{stories.map(story=><article class="testimonial" data-reveal><span class="stars">{Array.from({length:5},()=> <Icon name="star" size={13}/>)}</span><blockquote>“{story.quote}”</blockquote><cite>{story.name}<span>{story.type} · Illustrative story</span></cite></article>)}</div></section>
+    <section class="v2-faq border-top"><div class="container section-pad faq-layout"><div class="faq-heading"><p class="eyebrow">A LITTLE LESS UNKNOWN</p><h2 data-reveal>Good questions.<br/><em>Honest answers.</em></h2><a class="text-link" href="/faq/">A few more answers<Icon name="diagonal" size={17}/></a></div><Faq items={faqs.slice(0,4)}/></div></section>
+    <Cta/>
+  </div>
+</Layout>

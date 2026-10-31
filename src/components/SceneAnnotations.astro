@@ -1,0 +1,17 @@
+---
+interface Props {
+  variant: 'hero' | 'anatomy' | 'aligner' | 'implant' | 'accent';
+}
+const { variant } = Astro.props;
+const tooth = [['tooth-enamel', '01 / ENAMEL'], ['tooth-dentin', '02 / DENTIN'], ['tooth-pulp', '03 / PULP'], ['tooth-roots', '04 / ROOTS']];
+const implant = [['implant-crown', '01 / CROWN'], ['implant-abutment', '02 / ABUTMENT'], ['implant-fixture', '03 / IMPLANT']];
+const aligner = [['aligner-tray', '01 / CLEAR TRAY'], ['aligner-arch', '02 / DENTAL ARCH']];
+const anatomy = [['enamel', '01 / ENAMEL'], ['dentin', '02 / DENTIN'], ['pulp', '03 / PULP'], ['roots', '04 / ROOTS']];
+const parts = variant === 'hero' ? [...tooth, ...implant, ...aligner] : variant === 'anatomy' ? anatomy : variant === 'implant' ? implant : variant === 'aligner' ? aligner : tooth;
+---
+<div class="scene-annotations" aria-hidden="true">
+  <svg class="scene-leaders" viewBox="0 0 640 600" fill="none">
+    {parts.map(([key]) => <g data-scene-leader={key}><path/><circle r="3"/></g>)}
+  </svg>
+  {parts.map(([key, text]) => <span class="scene-part-label" data-scene-label={key}>{text}</span>)}
+</div>

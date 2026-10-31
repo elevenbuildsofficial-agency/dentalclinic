@@ -1,0 +1,16 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  href: string;
+  light?: boolean;
+  secondary?: boolean;
+  class?: string;
+}
+const { href, light, secondary, class: className } = Astro.props;
+---
+<a href={href} class:list={['button', className, { 'button-light': light, 'button-outline': secondary }]} data-magnetic>
+  <span>
+    <slot />
+  </span>
+  <Icon name="diagonal" size={18}/>
+</a>

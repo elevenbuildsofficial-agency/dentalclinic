@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import Cta from '../../components/Cta.astro';
+import { clinic } from '../../clinic.config';
+export function getStaticPaths() {
+  return clinic.doctors.map((doctor) => ({ params: { slug: doctor.slug }, props: { doctor } }));
+}
+const { doctor } = Astro.props;
+---
+<Layout title={doctor.name} description={doctor.bio}>
+  <section class="container section-pad">
+    <div class="breadcrumbs">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/team/">The team</a>
+      <span>/</span>
+      <span>{doctor.name}</span>
+    </div>
+    <div class="profile-layout">
+      <div class:list={["doctor-image", {"portrait-triptych": doctor.imageLayout === "triptych"}]} style={`--portrait-left:${doctor.imageOffset}`}>
+        <img src={doctor.image} width="700" height="850" alt={`Original photographic demo portrait of fictional dentist ${doctor.name}`}/>
+      </div>
+      <div>
+        <p class="eyebrow">{doctor.role}</p>
+        <h1 data-headline>{doctor.name}</h1>
+        <p class="lede">{doctor.bio}</p>
+        <p class="lede">{doctor.detail}</p>
+        <p class="eyebrow">EDUCATION</p>
+        <p>{doctor.credentials}</p>
+        <p class="eyebrow">PARTICULAR INTERESTS</p>
+        <p>{doctor.specialty}</p>
+        <blockquote>“{doctor.quote}”</blockquote>
+      <Button href="/book/">Come say hello</Button>
+      </div>
+    </div>
+  <p class="illustrative-note spaced-top">This is a fictional clinician profile with illustrative credentials.</p>
+  </section>
+  <Cta/>
+  </Layout>

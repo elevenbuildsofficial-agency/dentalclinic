@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import Cta from '../../components/Cta.astro';
+import { clinic, services } from '../../clinic.config';
+---
+<Layout title="Our care, from everyday to a fresh start" description={`Explore implants, aligners, whitening, root canal treatment, veneers and family dentistry at the fictional ${clinic.name}.`}>
+  <PageHero eyebrow="OUR CARE" title="For the everyday." accent="And the new beginnings." description="From a regular check-up to the thing you have been meaning to ask about. Considered care, with a clear next step." scene/>
+  <section class="container section-pad">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">SIX WAYS TO FEEL MORE LIKE YOU</p>
+        <h2 data-reveal>A whole smile.<br/>
+          <em>A whole lot of care.</em>
+        </h2>
+      </div>
+      <p>Each treatment starts with an assessment, a conversation and a written estimate.</p>
+    </div>
+    <div class="service-overview">{services.map(service=>
+        <a class="service-row" href={`/services/${service.slug}/`}>
+          <span class="service-number">{service.number}</span>
+          <div>
+            <p class="eyebrow">{service.category}</p>
+            <h3>{service.name}</h3>
+            <p>{service.description}</p>
+            <div class="service-hover-graphic">
+              <Icon name={service.icon} size={36}/>
+              <span>Explore treatment · {service.price}</span>
+            </div>
+          </div>
+        <Icon name="diagonal" size={22}/>
+        </a>)}</div>
+  <p class="illustrative-note">Demo treatment information. Individual suitability, outcomes, duration and costs require a clinical assessment.</p>
+  </section>
+<section class="bg-sand section-pad">
+  <div class="container split-section">
+    <div>
+      <p class="eyebrow">PREVENTION IS PART OF THE PICTURE</p>
+      <h2 data-reveal>The best care<br/>
+        <em>often starts small.</em>
+        </h2>
+      </div>
+    <div>
+      <p>Routine examinations, cleaning and gum health support are part of the studio’s everyday approach. Your recall schedule is based on your own needs, rather than a one-size-fits-all timetable.</p>
+      <a class="text-link spaced-top" href="/pricing/">A clearer look at costs<Icon name="diagonal" size={18}/>
+        </a>
+      </div>
+    </div>
+  </section>
+<Cta/>
+</Layout>

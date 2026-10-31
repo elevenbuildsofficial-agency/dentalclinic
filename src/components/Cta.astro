@@ -1,0 +1,20 @@
+---
+import Button from './Button.astro';
+import { clinic } from '../clinic.config';
+---
+<section class="cta-band section-pad">
+  <div class="container cta-inner">
+    <div>
+      <p class="eyebrow">LET’S START WITH A CONVERSATION</p>
+    <h2>A good feeling.<br/>Before you even <em>smile.</em>
+      </h2>
+    </div>
+  <div class="cta-action">
+    <Button href="/book/" light>Find your first appointment</Button>
+    <p>New faces. Familiar care.<br/>{clinic.address.area}</p>
+    </div>
+  <svg class="cta-flower" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+    <path d="M100 15c25 0 10 60 28 42s54-45 65-20-48 40-23 50 51 45 30 61-55-36-59-9-20 61-43 48 12-62-13-54-62 10-65-17 59-16 43-38-31-59-5-66 34 58 42 3Z" stroke="currentColor"/>
+    </svg>
+  </div>
+</section>

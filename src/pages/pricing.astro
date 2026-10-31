@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Cta from '../components/Cta.astro';
+import { clinic, services } from '../clinic.config';
+---
+<Layout title="Clear costs. Considered choices." description="Illustrative dental treatment prices, insurance information and payment options with a written estimate before treatment.">
+  <PageHero eyebrow="PRICING & INSURANCE" title="Clarity feels good." accent="Including the cost." description="A clear range to start the conversation. A personal, written estimate before you decide. No guessing what comes next."/>
+  <section class="container section-pad">
+    <p class="eyebrow">A HELPFUL STARTING POINT / ILLUSTRATIVE USD PRICES</p>
+    <table class="pricing-table">
+      <caption class="sr-only">Illustrative treatment price ranges in US dollars</caption>
+      <thead>
+        <tr>
+          <th scope="col">The care</th>
+          <th scope="col">Time to consider</th>
+          <th scope="col">Sample range</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>New patient assessment</td>
+          <td>Around 60 minutes</td>
+          <td>{clinic.prices.newPatient}</td>
+        </tr>
+        <tr>
+          <td>Routine cleaning</td>
+          <td>Around 45 minutes</td>
+          <td>{clinic.prices.cleaning}</td>
+        </tr>{services.map(s=>
+          <tr>
+            <td>
+              <a href={`/services/${s.slug}/`}>{s.name}</a>
+            </td>
+            <td>{s.duration}</td>
+            <td>{s.price}</td>
+          </tr>)}<tr>
+          <td>Emergency assessment</td>
+          <td>Based on urgency</td>
+          <td>{clinic.prices.emergency}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="illustrative-note spaced-top">{clinic.prices.note} Prices here are sample content, not a quote or offer.</p>
+  </section>
+  <section class="bg-sand section-pad">
+    <div class="container split-section">
+      <div>
+        <p class="eyebrow">INSURANCE, IN PLAIN LANGUAGE</p>
+        <h2 data-reveal>A little help<br/>
+          <em>with the paperwork.</em>
+        </h2>
+        <p>At a real practice, our team would check your individual benefits and explain estimated coverage before treatment. A logo or plan name alone does not confirm eligibility.</p>
+        <div class="insurance-list">{clinic.insurance.map(name=>
+            <span>{name}</span>)}</div>
+        <p class="illustrative-note">Example providers only. This fictional clinic has no insurance contracts.</p>
+      </div>
+      <div>
+        <p class="eyebrow">ROOM TO PLAN</p>
+        <h2 data-reveal>Care that fits<br/>
+          <em>your circumstances.</em>
+        </h2>
+        <p>{clinic.prices.financing}. A real financing provider would confirm eligibility, interest, fees and total repayment before you choose.</p>
+        <p class="spaced-top">When it is clinically appropriate, we can also discuss a phased care plan, so the urgent things come first and everything else has a sensible timeline.</p>
+        <div class="spaced-top">
+          <Button href="/contact/">Talk it through with us</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Cta/>
+</Layout>

@@ -1,0 +1,27 @@
+---
+import SceneAnnotations from './SceneAnnotations.astro';
+interface Props {
+  variant?: 'hero' | 'anatomy' | 'aligner' | 'implant' | 'accent';
+  class?: string;
+}
+const { variant = 'hero', class: className } = Astro.props;
+const interactive = variant === 'hero';
+const label = interactive ? 'Interactive dental models with part labels: natural tooth, implant and clear aligners' : variant === 'aligner' ? 'A seated clear tray lifts to reveal a curved dental arch, with pointer labels' : variant === 'anatomy' ? 'A simplified tooth separates into labeled enamel, dentin, pulp and roots' : variant === 'implant' ? 'A titanium dental implant separates into a labeled crown, abutment and implant' : 'An original three-dimensional molar sculpture with labeled enamel and roots';
+---
+<div class:list={['tooth-scene', className, `scene-${variant}`]} data-scene={variant} role={interactive ? 'group' : 'img'} aria-label={label}>
+  <img src={variant === 'aligner' ? '/images/aligner-fallback.svg' : variant === 'implant' ? '/images/implant-fallback.svg' : '/images/tooth-fallback.svg'} alt="" class="scene-fallback" width="640" height="720" />
+  <div class="scene-canvas" aria-hidden="true"></div>
+  {variant === 'anatomy' && <>
+    <img src="/images/anatomy-fallback.svg" alt="" class="scene-fallback anatomy-static" width="640" height="720"/>
+  </>}
+  <SceneAnnotations variant={variant}/>
+  {interactive && <>
+    <div class="scene-heading"><span class="scene-index" data-scene-title>01 / NATURAL TOOTH</span><span class="scene-cross" aria-hidden="true">+</span></div>
+    <div class="scene-footnote"><span data-scene-subtitle aria-live="polite">Considered care. Every layer.</span><span>SCROLL TO EXPLORE</span></div>
+    <div class="scene-controls" role="group" aria-label="Choose a dental model">
+      <button type="button" data-scene-view="tooth" aria-pressed="true" disabled><span>01</span> Natural tooth</button>
+      <button type="button" data-scene-view="implant" aria-pressed="false" disabled><span>02</span> Dental implant</button>
+      <button type="button" data-scene-view="aligner" aria-pressed="false" disabled><span>03</span> Clear aligners</button>
+    </div>
+  </>}
+</div>

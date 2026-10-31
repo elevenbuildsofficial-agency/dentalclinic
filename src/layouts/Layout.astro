@@ -1,0 +1,75 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/hanken-grotesk';
+import '../styles/global.css';
+import '../styles/redesign.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { clinic } from '../clinic.config';
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = clinic.description } = Astro.props;
+const fullTitle = `${title} | ${clinic.name}`;
+const canonical = new URL(Astro.url.pathname, clinic.siteUrl);
+const colorVars = Object.entries(clinic.colors)
+  .map(([key, value]) => `--${key}:${value}`)
+  .join(';');
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dentist',
+  name: clinic.name,
+  description: clinic.description,
+  url: clinic.siteUrl,
+  telephone: clinic.phone,
+  email: clinic.email,
+  image: new URL('/images/og-card.svg', clinic.siteUrl).href,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: clinic.address.street,
+    addressLocality: clinic.address.city,
+    addressRegion: clinic.address.region,
+    postalCode: clinic.address.postcode,
+    addressCountry: clinic.address.country,
+  },
+  priceRange: '$$–$$$',
+  openingHoursSpecification: clinic.hours
+    .filter((day) => day.open)
+    .map((day) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: day.day,
+      opens: day.open,
+      closes: day.close,
+    })),
+};
+---
+<!doctype html>
+<html lang="en" style={colorVars}>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="generator" content={Astro.generator}/>
+  <title>{fullTitle}</title>
+  <meta name="description" content={description}/>
+  <link rel="canonical" href={canonical}/>
+  <meta name="theme-color" content={clinic.colors.porcelain}/>
+  <link rel="icon" type="image/svg+xml" href={clinic.logo}/>
+  <meta property="og:title" content={fullTitle}/>
+  <meta property="og:description" content={description}/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content={canonical}/>
+  <meta property="og:image" content={new URL('/images/og-card.svg', clinic.siteUrl)}/>
+  <meta property="og:image:alt" content={`${clinic.name} — thoughtful dentistry`}/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)}/>
+  </head>
+  <body>
+  <Header/>
+  <main id="main">
+    <slot/>
+    </main>
+  <Footer/>
+  <script>import '../scripts/main';</script>
+  </body>
+  </html>

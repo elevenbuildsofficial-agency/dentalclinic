@@ -1,0 +1,132 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { clinic } from '../clinic.config';
+const hourLabel = (value: string) =>
+  new Date(`2000-01-01T${value}`).toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+---
+<Layout title="Find your way to a calmer visit" description={`Explore the fictional ${clinic.name} studio address, opening hours, contact options and an illustrated neighborhood map.`}>
+  <PageHero eyebrow="COME SAY HELLO" title="A familiar corner." accent="A different feeling." description="A neighborhood studio with room for a conversation. Here is how to find your way to us." scene/>
+  <section class="container section-pad contact-layout">
+    <div>
+      <p class="eyebrow">WE’RE EASY TO TALK TO</p>
+    <h2 class="spaced-top" data-reveal>A question.<br/>
+      <em>A hello. A fresh start.</em>
+      </h2>
+    <div class="contact-info">
+      <div>
+        <p class="eyebrow">FIND THE STUDIO</p>
+        <p>{clinic.address.street}<br/>{clinic.address.city}, {clinic.address.region} {clinic.address.postcode}</p>
+        </div>
+      <div>
+        <p class="eyebrow">A REAL CONVERSATION</p>
+        <a href={`tel:${clinic.phoneHref}`}>{clinic.phone}</a>
+        <a href={`https://wa.me/${clinic.whatsapp}`} target="_blank" rel="noreferrer">WhatsApp ↗</a>
+        <a href={`mailto:${clinic.email}`}>{clinic.email}</a>
+        </div>
+      </div>
+    <span class="open-badge" data-open-badge>
+      <span class="status-dot">
+        </span>
+      <span data-open-text>Checking studio hours…</span>
+      </span>
+    <div class="hours">{[...clinic.hours.slice(1),clinic.hours[0]].map(day=>
+      <div>
+          <span>{day.day}</span>
+          <span>{day.open?`${hourLabel(day.open)} – ${hourLabel(day.close)}`:'Closed'}</span>
+          </div>)}</div>
+    <p class="illustrative-note">All hours are in {clinic.timezone}. Demo address and contact channels are fictional. Hours do not account for holidays.</p>
+    </div>
+    <form class="contact-form" data-contact-form novalidate>
+    <p class="eyebrow">A NOTE TO THE STUDIO</p>
+    <h2>What’s on <em>your mind?</em>
+      </h2>
+      <p>Try the contact form using sample details. Nothing is sent or stored. For urgent symptoms, contact a real dental provider directly.</p>
+      <div class="form-field">
+      <label for="contact-name">Your name</label>
+      <input name="name" id="contact-name" autocomplete="name" required maxlength="120"/>
+      </div>
+      <div class="form-field">
+      <label for="contact-email">Email address</label>
+      <input name="email" id="contact-email" type="email" autocomplete="email" required maxlength="120"/>
+      </div>
+      <div class="form-field">
+      <label for="contact-topic">What would you like to talk about?</label>
+      <select name="topic" id="contact-topic">
+        <option>A first appointment</option>
+        <option>Treatment options</option>
+        <option>Insurance & pricing</option>
+        <option>Something else</option>
+        </select>
+        </div>
+      <div class="form-field">
+      <label for="contact-message">Your message</label>
+      <textarea name="message" id="contact-message" required minlength="10" maxlength="1500" placeholder="Sample message: I’d like to learn about a first visit.">
+        </textarea>
+        </div>
+      <label class="form-consent">
+      <input type="checkbox" name="consent" required/>
+      <span>I understand this is a demo. <a href="/privacy/">Privacy details.</a>
+        </span>
+        </label>
+      <p class="form-error" data-contact-error role="alert">
+      </p>
+      <button type="submit" class="button" disabled data-form-enable>Preview sending a note<Icon name="diagonal" size={18}/>
+      </button>
+      <div class="confirmation" data-contact-success hidden tabindex="-1">
+      <Icon name="check" size={32}/>
+      <h3>That’s how it would feel.</h3>
+        <p>Your demo message passed validation. No message was sent, and no information was saved.</p>
+        <button class="back-button" type="button" data-contact-reset>Try again</button>
+        </div>
+      </form>
+    </section>
+  <section class="container section-pad border-top">
+  <div class="section-heading">
+    <div>
+    <p class="eyebrow">THE NEIGHBORHOOD, ILLUSTRATED</p>
+        <h2>A little closer<br/>
+          <em>to feeling at home.</em>
+          </h2>
+        </div>
+      <p>A stylized view of our imagined neighborhood. Our demo address is fictional.</p>
+      </div>
+    <div class="map-block" role="img" aria-label={`Illustrative neighborhood map showing a fictional ${clinic.name} studio near a park and local streets`}>
+    <svg viewBox="0 0 1200 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect width="1200" height="440" fill="#e4eade"/>
+      <path d="M0 250 190 440H0Z" fill="#abcfc8"/>
+      <path d="M780 0h180v170H780zM330 310h200v130H330z" fill="#bdd5b9"/>
+      <g stroke="#fbfcf6" stroke-width="24">
+        <path d="M80-40 530 480M370-50 820 480M690-50 1140 480M-40 180 1200-60M-40 400 1240 130M270 480 1240 310"/>
+        </g>
+        <g fill="#698075" font-family="sans-serif" font-size="10" letter-spacing="2">
+        <text x="596" y="125" transform="rotate(-12 596 125)">{clinic.address.street.toUpperCase()}</text>
+        <text x="820" y="70">GARDEN PARK</text>
+          <text x="145" y="343">WATERFRONT</text>
+          <text x="390" y="390">THE GREEN</text>
+          </g>
+        </svg>
+      <div class="map-pin">
+      <Icon name="pin" size={24}/>{clinic.shortName}</div>
+      <div class="map-caption">{clinic.address.street} / {clinic.address.area} · Illustrative location</div>
+      </div>
+    <div class="directions">
+    <div>
+    <h3>By subway.</h3>
+        <p>Our imagined neighborhood sits near Borough Hall and Court Street stations, with a quiet walk towards the waterfront.</p>
+        </div>
+      <div>
+    <h3>On two wheels.</h3>
+        <p>Our imagined studio has bicycle parking around the corner. Leave a little time for a slower journey through the neighborhood.</p>
+        </div>
+      <div>
+    <h3>A little extra support.</h3>
+        <p>Need a little help arriving? Let the team know when you book so you can discuss access and assistance before your visit.</p>
+        </div>
+      </div>
+    </section>
+  </Layout>

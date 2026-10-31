@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import Cta from '../components/Cta.astro';
+import { clinic } from '../clinic.config';
+---
+<Layout title="Questions, with time for answers" description={`A guide to first appointments, anxiety, insurance, family visits and booking at the fictional ${clinic.name}.`}>
+  <PageHero eyebrow="COMMON QUESTIONS" title="A little less wondering." accent="A little more knowing." description="The practical things, the small worries and the questions you have been meaning to ask."/>
+  <section class="container section-pad faq-layout">
+    <div class="faq-heading">
+      <p class="eyebrow">GOOD QUESTIONS ARE ALWAYS WELCOME</p>
+      <h2>Let’s make<br/>
+      <em>things clearer.</em>
+      </h2>
+    <a href="/contact/" class="text-link">Something else on your mind?<Icon name="diagonal" size={17}/>
+      </a>
+    </div>
+  <Faq/>
+  </section>
+<Cta/>
+</Layout>

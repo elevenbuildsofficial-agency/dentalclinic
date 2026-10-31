@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Cta from '../components/Cta.astro';
+import { clinic, stories } from '../clinic.config';
+---
+<Layout title="The stories behind the smiles" description="Illustrative stories about feeling heard, starting again and getting comfortable in the dental chair.">
+  <PageHero eyebrow="PATIENT STORIES" title="What stays with you" accent="after the appointment." description="Often, it is the small things. Being heard. Knowing what comes next. Feeling ready to come back."/>
+  <section class="container section-pad">
+    <div class="review-feature">
+      <div class="rating-number">
+        <span data-count={clinic.stats[0].value}>4.9</span>
+        <p>OUT OF 5 / DEMO RATING</p>
+      </div>
+      <div>
+        <span class="stars">{Array.from({length:5},()=>
+            <Icon name="star" size={18}/>)}</span>
+        <blockquote>“{stories[1].quote}”</blockquote>
+      <cite>{stories[1].name} / {stories[1].type}</cite>
+      <p>A fictional patient voice, written for this demo.</p>
+      </div>
+    </div>
+  </section>
+  <section class="container section-pad border-top">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">THE MOMENTS THAT MATTER</p>
+      <h2 data-reveal>Every smile<br/>
+        <em>has a starting point.</em>
+        </h2>
+      </div>
+    </div>
+  <div class="testimonials">{stories.map(story=>
+    <article class="testimonial" data-reveal>
+        <p class="eyebrow">{story.type}</p>
+        <blockquote>“{story.quote}”</blockquote>
+        <p class="lede" style="font-size:14px">{story.detail}</p>
+        <cite class="spaced-top">{story.name}<span>Illustrative story / not a real review</span>
+          </cite>
+        </article>)}</div>
+    </section>
+  <Cta/>
+  </Layout>

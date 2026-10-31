@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import Faq from '../../components/Faq.astro';
+import Cta from '../../components/Cta.astro';
+import { services } from '../../clinic.config';
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+const { service } = Astro.props;
+const related = services.filter((s) => s.slug !== service.slug).slice(0, 2);
+---
+<Layout title={service.name} description={service.description}>
+  <PageHero eyebrow={`OUR CARE / ${service.name}`} title={service.name} accent={service.short} description={service.description} scene sceneVariant={service.slug === 'dental-implants' ? 'implant' : service.slug === 'clear-aligners' ? 'aligner' : 'accent'} cta="Let’s talk about your options"/>
+<section class="container section-pad service-detail-layout">
+  <div class="prose">
+    <h2>Is it right <em>for you?</em>
+      </h2>
+    <p>{service.forWho}</p>
+    <h2>A little look at <em>the process.</em>
+      </h2>
+    <ol class="procedure-list">{service.procedure.map(step=>
+      <li>{step}</li>)}</ol>
+    <h2>Care that carries <em>on.</em>
+      </h2>
+    <p>{service.aftercare}</p>
+    <h2>A few things <em>to know.</em>
+      </h2>
+    <Faq items={service.faq}/>
+    <p class="illustrative-note spaced-top">General demo information, not personal treatment advice. Your clinician will explain the benefits, risks and alternatives that apply to you.</p>
+    </div>
+  <aside class="info-panel">
+    <p class="eyebrow">THE CONSIDERED DETAILS</p>
+    <dl>
+      <dt>Illustrative investment</dt>
+      <dd>{service.price}</dd>
+      <dt>Time, in perspective</dt>
+      <dd>{service.duration}</dd>
+      <dt>Always included</dt>
+      <dd>A conversation. A clear plan.</dd>
+      </dl>
+    <Button href={`/book/?service=${service.slug}`}>Find a time to talk</Button>
+    <p>These sample USD ranges are for demonstration. Additional care may affect the total. Your written estimate comes before treatment.</p>
+    <a href="/pricing/" class="text-link">Pricing & insurance<Icon name="diagonal" size={16}/>
+      </a>
+    </aside>
+  </section>
+<section class="bg-sand section-pad">
+  <div class="container">
+    <p class="eyebrow">THE REST OF THE PICTURE</p>
+    <h2 class="spaced-top">Other ways <em>we care.</em>
+      </h2>
+    <div class="related-list">{related.map(s=>
+      <a class="service-row" href={`/services/${s.slug}/`}>
+          <span class="service-number">{s.number}</span>
+          <div>
+            <h3>{s.name}</h3>
+            <p>{s.short}</p>
+            </div>
+          <Icon name="diagonal"/>
+          </a>)}</div>
+    </div>
+  </section>
+<Cta/>
+</Layout>

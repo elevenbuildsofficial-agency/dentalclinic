@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { clinic, articles } from '../../clinic.config';
+const article = articles[0];
+---
+<Layout title={article.title} description={article.excerpt}>
+  <PageHero eyebrow="THE JOURNAL / YOUR FIRST VISIT" title="A calmer first visit" accent="starts before the chair."/>
+  <div class="container">
+    <div class="article-meta">
+      <span>By {clinic.doctors[0].name} · Fictional editorial author</span>
+    <time datetime="2026-10-29">29 October 2026</time>
+    <span>{article.time}</span>
+    </div>
+  <div class="image-wide spaced-top">
+    <img src="/images/studio-v2.webp" width="900" height="720" alt="An original photographic demo of a calm, sunlit dental studio"/>
+    </div>
+  <article class="article-body prose">
+    <p class="lede">There is a particular kind of relief in knowing what to expect. If it has been a while since you last saw a dentist, a little preparation can make the first conversation easier.</p>
+    <h2>Start with <em>the honest version.</em>
+      </h2>
+    <p>You do not need to arrive with an explanation for the gap between appointments. You can simply say, “It has been a while, and I feel a little nervous.” That gives the team useful information about how to approach your visit.</p>
+    <p>When you book, mention anything that has made past appointments difficult: a particular sound, a sensitive tooth, feeling rushed, or not knowing when something will happen.</p>
+    <h2>Bring a few <em>useful things.</em>
+      </h2>
+    <p>A list of medications, relevant medical information, insurance details if applicable, and any dental records you already have can help. Write down the questions you want to ask so they do not disappear the moment you sit down.</p>
+    <ul>
+      <li>What have you noticed, and when did it begin?</li>
+      <li>What would help you feel more comfortable?</li>
+      <li>What would you like explained before making a decision?</li>
+      </ul>
+    <h2>Agree on <em>a pause.</em>
+      </h2>
+    <p>Ask the clinician how you can signal that you need a break. A simple raised hand can make it easier to feel involved. You can ask for explanations before each step, or choose to hear less detail if that suits you better.</p>
+    <h2>Leave with <em>a next step.</em>
+      </h2>
+    <p>A useful first appointment does not need to solve everything. It should leave you with an understanding of your oral health, the choices available and what comes next. Ask for an estimate in writing and time to consider any non-urgent treatment.</p>
+    <p>If you have urgent pain, swelling or an injury, arrange timely care rather than waiting for a routine appointment. The <a href="https://www.nhs.uk/symptoms/toothache/" target="_blank" rel="noreferrer">NHS toothache guidance</a> explains symptoms that need prompt attention.</p>
+    <p class="illustrative-note">An original demo article, written for this fictional clinic. General educational content; not individual clinical advice.</p>
+    </article>
+  </div>
+  <Cta/>
+  </Layout>
