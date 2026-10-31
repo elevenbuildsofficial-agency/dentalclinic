@@ -596,80 +596,8 @@ h2 {
 .v2-treatments > .container > .section-heading {
   margin-bottom: 40px;
 }
-.treatment-feature-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-.treatment-feature {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 595px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  overflow: hidden;
-  transition: transform 0.7s var(--ease);
-  isolation: isolate;
-}
-.treatment-feature:hover {
-  transform: translateY(-5px);
-}
-.treatment-implant {
-  background: #e4ede7;
-}
-.treatment-aligners {
-  background: #fdfdf9;
-}
-.treatment-feature-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 28px 32px;
-  position: relative;
-  z-index: 2;
-}
-.treatment-feature-heading .eyebrow {
-  font-size: 9px;
-}
-.treatment-scene {
-  height: 322px;
-  position: relative;
-  margin-top: -16px;
-  pointer-events: none;
-}
-.treatment-scene > .tooth-scene {
-  height: 340px;
-  min-height: 340px;
-  position: absolute;
-  inset: -20px 0 0;
-}
-.treatment-feature-copy {
-  position: relative;
-  z-index: 2;
-  padding: 12px 32px 34px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-.treatment-feature-copy h3 {
-  font-size: 42px;
-  line-height: 1.1;
-}
-.treatment-feature-copy > p {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 14px;
-}
-.treatment-text-link {
-  margin-top: 22px;
-  font-size: 12px;
-  border-bottom: 1px solid var(--ink);
-  padding-bottom: 6px;
-}
 .v2-service-list {
   border-top: 1px solid var(--line);
-  margin-top: 40px;
 }
 .v2-service-list > a {
   display: grid;
@@ -1135,15 +1063,6 @@ h2 {
   .first-visit-price {
     gap: 16px;
   }
-  .treatment-feature-copy h3 {
-    font-size: 36px;
-  }
-  .treatment-feature {
-    min-height: 560px;
-  }
-  .treatment-scene {
-    height: 300px;
-  }
   .v2-service-list h3 {
     font-size: 29px;
   }
@@ -1331,28 +1250,6 @@ h2 {
   }
   .photo-caption > a {
     margin-top: 12px;
-  }
-  .treatment-feature-heading {
-    padding: 24px;
-  }
-  .treatment-feature-copy {
-    padding: 8px 24px 28px;
-  }
-  .treatment-feature-copy h3 {
-    font-size: 34px;
-  }
-  .treatment-feature {
-    min-height: 530px;
-  }
-  .treatment-scene {
-    height: 285px;
-  }
-  .treatment-scene > .tooth-scene {
-    height: 300px;
-    min-height: 300px;
-  }
-  .treatment-feature-copy > p {
-    font-size: 11px;
   }
   .v2-service-list > a {
     grid-template-columns: 28px 1fr 24px;
@@ -1715,37 +1612,6 @@ h2 {
     font-size: 8px;
     line-height: 1.7;
   }
-  .treatment-feature-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .treatment-feature {
-    min-height: 550px;
-  }
-  .treatment-feature-heading {
-    padding: 24px 26px;
-  }
-  .treatment-scene {
-    height: 300px;
-  }
-  .treatment-scene > .tooth-scene {
-    height: 315px;
-    min-height: 315px;
-  }
-  .treatment-feature-copy {
-    padding: 10px 26px 30px;
-  }
-  .treatment-feature-copy h3 {
-    font-size: 37px;
-  }
-  .treatment-feature-copy > p {
-    font-size: 12px;
-    max-width: 270px;
-  }
-  .treatment-text-link {
-    margin-top: 20px;
-    font-size: 11px;
-  }
   .v2-treatments .section-heading h2 {
     font-size: 41px;
   }
@@ -1753,7 +1619,6 @@ h2 {
     margin-top: 24px;
   }
   .v2-service-list {
-    margin-top: 28px;
   }
   .v2-service-list > a {
     padding-block: 24px;
@@ -1966,9 +1831,6 @@ h2 {
   .hero-v2-art .scene-fallback {
     inset: 0 0 30px;
     height: calc(100% - 30px);
-  }
-  .treatment-feature:hover {
-    transform: none;
   }
   .insurance-paper {
     transform: none;
